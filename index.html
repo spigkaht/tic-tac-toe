@@ -1,14 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="./js/script.js" defer></script>
-  <link rel="stylesheet" href="./css/style.css" />
-  <link rel="shortcut icon" href="#">
-  <title>Tic Tac Toe</title>
-</head>
-<body>
-
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tic Tac Toe</title>
+    <script src="./js/script.js" defer></script>
+    <link rel="shortcut icon" href="#">
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="container">
+      <button class="square top-row lft-col" id="0"></button>
+      <button class="square top-row mid-col" id="1"></button>
+      <button class="square top-row rgt-col" id="2"></button>
+      <button class="square mid-row lft-col" id="3">X</button>
+      <button class="square mid-row mid-col" id="4"></button>
+      <button class="square mid-row rgt-col" id="5"></button>
+      <button class="square btm-row lft-col" id="6">X</button>
+      <button class="square btm-row mid-col" id="7"></button>
+      <button class="square btm-row rgt-col" id="8"></button>
+    </div>
+    <div id="winContainer"></div>
+  </body>
 </html>
