@@ -12,19 +12,6 @@ function createPlayer (name, marker) {
   return { name, marker };
 }
 
-const displayGameBoard = (gameBoard) => {
-  console.log(gameBoard[0], "|", gameBoard[1], "|", gameBoard[2]);
-  console.log("---------");
-  console.log(gameBoard[3], "|", gameBoard[4], "|", gameBoard[5]);
-  console.log("---------");
-  console.log(gameBoard[6], "|", gameBoard[7], "|", gameBoard[8]);
-}
-
-// const getUserInput = () => {
-//   const input = window.prompt("Choose a position for your X marker, Player 1");
-//   return input;
-// }
-
 const checkWinCondition = (board, player) => {
   let winner = player;
   const marker = player.marker;
@@ -60,69 +47,42 @@ function delay(ms) {
   const playerTwo = createPlayer("Player 2", "O");
   const gameBoardObj = createGameBoard();
   let currentPlayer = playerOne;
+  let winner = undefined;
 
   const domSquares = document.querySelectorAll(".square");
+  const winDiv = document.querySelector("#winContainer");
 
   domSquares.forEach((square) => {
     square.addEventListener("mouseover", (e) => {
       if (square.textContent == "") {
-        square.textContent = "X";
         square.classList.add("greyButton");
       }
     })
 
     square.addEventListener("mouseout", (e) => {
       if (square.classList.contains("greyButton")) {
-        square.textContent = "";
         square.classList.remove("greyButton");
       }
     })
 
     square.addEventListener("click", (e) => {
-      if (square.classList.container("greyButton")) {
-        square.textContent = "X";
+      if (square.textContent == "" && winner == undefined) {
+        square.textContent = currentPlayer.marker;
+        gameBoardObj.gameBoard[square.id] = currentPlayer.marker
+
+        winner = checkWinCondition(gameBoardObj.gameBoard, currentPlayer);
+        if (winner != undefined) {
+          winDiv.textContent = `The winner is ${winner.name}!`;
+          running = false
+        }
+
+        if (gameBoardObj.gameBoard.indexOf("-") == -1) {
+          winDiv.textContent = "Draw!";
+          running = false
+        }
+
+        currentPlayer = currentPlayer == playerOne ? playerTwo : playerOne;
       }
     })
   })
-
-
-
-  console.log(domSquares);
-  console.log("Running!!");
-  // while (running == true) {
-    // console.clear();
-    // displayGameBoard(gameBoardObj.gameBoard);
-    // console.log(currentPlayer.name, "'s turn");
-
-    // await delay(200);
-    // let userInput = getUserInput();
-    // await delay(200);
-
-    // if (gameBoardObj.gameBoard[userInput] != "-") {
-    //   console.log("That spot is already taken!");
-    //   userInput = getUserInput();
-    // } else if (userInput > 8 || userInput < 0) {
-    //   console.log("Incorrect position for entry!");
-    //   userInput = getUserInput();
-    // }
-
-    // if (currentPlayer == playerOne) {
-    //   gameBoardObj.gameBoard[userInput] = "X";
-    //   currentPlayer = playerTwo;
-    // } else if (currentPlayer == playerTwo) {
-    //   gameBoardObj.gameBoard[userInput] = "O"
-    //   currentPlayer = playerOne;
-    // }
-
-    winner = checkWinCondition(gameBoardObj.gameBoard, currentPlayer);
-    if (winner != undefined) {
-      console.log("The winner is", winner.name, "!");
-      running = false
-    }
-
-    if (gameBoardObj.gameBoard.indexOf("-") == -1) {
-      console.log("Draw!")
-      running = false
-    }
-  // }
 })();
